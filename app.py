@@ -21,6 +21,11 @@ st.write("Ask me anything! I'll try to help you.")
 
 # Get Gemini API key
 api_key = os.getenv("GOOGLE_API_KEY")
+if not api_key:
+    try:
+        api_key = st.secrets["GOOGLE_API_KEY"]
+    except (KeyError, FileNotFoundError):
+        api_key = None
 
 # Create the input box
 question = st.text_area(
